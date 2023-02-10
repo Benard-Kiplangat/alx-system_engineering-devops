@@ -1,2 +1,2 @@
 #!/bin/bash
-chmod -R 755 .
+find ./ -type f -maxdepth 1 -exec chmod 644 {} \;find ./ -type d -maxdepth 1 -exec chmod 755 {} \;
