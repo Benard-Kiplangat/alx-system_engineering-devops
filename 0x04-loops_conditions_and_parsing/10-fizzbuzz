@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# This script displays fizzbuzz when number is a multiple of 5 and 3,
+# or fizz when number is multiple of 3, or buzz when number is multiple of 5
+
+i=1;
+
+for ((i=1; i<101; i++))
+do
+	if ((i % 3 == 0 && i % 5 == 0))
+	then
+		echo "FizzBuzz"
+	elif ((i % 5 == 0))
+	then
+		echo "Buzz"
+	elif ((i % 3 == 0))
+	then
+		echo "Fizz"
+	else
+		echo "$i"
+	fi
+done
