@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# This script displays the contents of the current directory
+# without displaying hidden files
+
+l=$(ls);
+
+for i in $l;
+do
+	echo "$i" | cut -d '-' -f2
+done

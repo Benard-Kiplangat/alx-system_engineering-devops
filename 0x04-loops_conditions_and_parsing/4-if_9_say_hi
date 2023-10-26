@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# This script is displaying "Best school" 10 times and if count is 9 say hi
+
+while ((i<10))
+do
+	if ((i==9))
+	then
+		echo "Hi"
+	fi
+		echo "Best School"
+	((i++))
+done
