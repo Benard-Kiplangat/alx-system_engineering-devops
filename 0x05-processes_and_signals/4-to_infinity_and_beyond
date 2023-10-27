@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# A script that dixplays "To infinity and beyond" after every two seconds,
+# and indefinetly
+
+while true
+do
+	echo "To infinity and beyond"
+	sleep 2
+done
