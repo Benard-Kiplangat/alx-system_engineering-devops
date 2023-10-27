@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# A script that kills our previous process without using kill or
+# killall command
+
+pkill -f 7-highlander 

@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# a script that displays "I am invincible!!! between each iteration based on
+# infinity and beyond script
+
+while true
+do
+	echo "To infinity and beyond"
+	sleep 2
+	trap 'echo "I am invincible!!!"' SIGTERM
+done
