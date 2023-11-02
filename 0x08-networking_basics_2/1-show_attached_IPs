@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# A script that displays all active IPv4 IPs
+
+hostname --all-ip-addresses
+hostname --ip-address
