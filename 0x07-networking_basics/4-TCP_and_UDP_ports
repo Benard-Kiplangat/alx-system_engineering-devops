@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# A script that shows only listening sockets, showing the pid of the program running each socket
+ipconfig -a
+
