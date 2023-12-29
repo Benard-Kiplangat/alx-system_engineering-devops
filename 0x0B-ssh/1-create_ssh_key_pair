@@ -4,4 +4,4 @@
 #   - Name of the created private key must be school
 #   - Number of bits in the created key should be 4096
 #   - The key to use passpharse "betty"
-ssh-keygen -f school -b 4096 -N betty
+ssh-keygen -b 4096 -f school -N betty
