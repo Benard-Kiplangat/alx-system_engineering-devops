@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# A scri[t that configures a HAproxy as load balancer
+
+apt-get -y update
+sudo apt-get -y install haproxy
+
+echo '
+frontend yelivate.tech
+        bind 0:80
+        default_backend web_servers
+
+backend web_servers
+        balance roundrobin
+        server 239348-web-01 54.237.52.24
+        server 239348-web-01 100.26.252.108
+' >> /etc/haproxy/haproxy.cfg
+
+service haproxy restart
