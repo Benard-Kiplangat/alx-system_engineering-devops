@@ -12,7 +12,7 @@ frontend yelivate.tech
 backend web_servers
         balance roundrobin
         server 239348-web-01 54.237.52.24
-        server 239348-web-01 100.26.252.108
+        server 239348-web-02 100.26.252.108
 ' >> /etc/haproxy/haproxy.cfg
 
 service haproxy restart
