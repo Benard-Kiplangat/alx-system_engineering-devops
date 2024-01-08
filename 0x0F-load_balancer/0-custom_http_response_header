@@ -29,4 +29,11 @@ if [[ -z $FIND ]]; then
     sed -i "42i $STRING" /etc/nginx/sites-available/default
 fi
 
+FIND=$(grep "error_page 404" /etc/nginx/sites-available/default)
+ERROR="\\\n\terror_page 404 /custom_404.html;\n"
+if [[ -z $FIND ]]; then
+    echo "Ceci n'est pas une page" > /var/www/html/custom_404.html
+    sed -i "40i $ERROR" /etc/nginx/sites-available/default
+fi
+
 sudo service nginx restart
