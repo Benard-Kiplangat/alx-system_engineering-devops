@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 # A script that automatically configures a new server
-cp /etc/nginx/nginx.conf /home/nginx
 
 apt-get -y update
 sudo apt-get -y install nginx
@@ -16,24 +15,10 @@ printf %s "server {
 }
 " > /etc/nginx/sites-available/default
 
-HOST_NAME=$(hostname)
-HEADER="\\\n\tadd_header X-Served-By $HOST_NAME;\n"
-FIND=$(grep "X-Server-by" /etc/nginx/sites-available/default)
-if [[ -z $FIND ]]; then
-    sed -i "23i $HEADER" /etc/nginx/sites-available/default
-fi
+sed -i "s/include \/etc\/nginx\/sites-enabled\/\*;/include \/etc\/nginx\/sites-enabled\/\*;\n\tadd_header X-Served-By \"$HOSTNAME\";/" /etc/nginx/nginx.conf
 
-FIND=$(grep "redirect_me" /etc/nginx/sites-available/default)
-STRING="\\\n\tlocation /redirect_me {\n\t\t return 301 https://www.youtube.com/watch?v=3MbaGJN2ioQ;\n\t}\n"
-if [[ -z $FIND ]]; then
-    sed -i "42i $STRING" /etc/nginx/sites-available/default
-fi
+echo "Ceci n'est pas une page" > /usr/share/nginx/html/custom_404.html
 
-FIND=$(grep "error_page 404" /etc/nginx/sites-available/default)
-ERROR="\\\n\terror_page 404 /custom_404.html;\n"
-if [[ -z $FIND ]]; then
-    echo "Ceci n'est pas une page" > /var/www/html/custom_404.html
-    sed -i "40i $ERROR" /etc/nginx/sites-available/default
-fi
+sed -i "s/server_name _;/server_name _;\n\trewrite ^\/redirect_me https:\/\/github.com\/benard-kiplangat permanent;\n\n\terror_page 404 \/custom_404.html;\n\tlocation = \/custom_404.html {\n\t\troot \/usr\/share\/nginx\/html;\n\t\tinternal;\n\t}/" /etc/nginx/sites-available/default
 
 sudo service nginx restart
