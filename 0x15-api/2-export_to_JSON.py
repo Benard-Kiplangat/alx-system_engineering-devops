@@ -22,7 +22,6 @@ if __name__ == "__main__":
             u_name = i.get('username')
             id_no = i.get('id')
 
-
     for i in data:
 
         new_dict = {}
@@ -36,7 +35,6 @@ if __name__ == "__main__":
     final_dict = {}
     final_dict[id_no] = row
     json_obj = json.dumps(final_dict)
-
 
     with open(argv[1] + ".json",  "w") as f:
         f.write(json_obj)
