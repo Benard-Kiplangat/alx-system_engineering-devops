@@ -2,7 +2,7 @@
 # Setting up server to curl port 80 with no issues
 apt-get update
 apt-get -y install curl
-rm /etc/nginx/sites-available/*
-rm /etc/nginx/sites-enabled/*~
-sed -i 's/8080/80/g' /etc/nginx/sites-enabled/default
+sudo rm /etc/nginx/sites-available/*
+sudo rm /etc/nginx/sites-enabled/*~
+sudo sed -i 's/8080/80/g' /etc/nginx/sites-enabled/default
 sudo service nginx restart
