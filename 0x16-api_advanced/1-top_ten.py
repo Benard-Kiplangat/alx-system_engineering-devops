@@ -8,15 +8,22 @@ import json
 def top_ten(subreddit):
     """ A function that prints the titles of top ten hot posts"""
 
-    headers = {'user-agent': '/u/benardkiplangat API python for ALX Learning'}
-    client = requests.session()
-    client.headers = headers
-    count = 0
-    r = client.get('https://www.reddit.com/r/{}/hot.json'.format(subreddit),
-                   allow_redirects=False)
+    header = {'user-agent': '/u/benardkiplangat API python for ALX Learning'}
+    url = 'https://www.reddit.com/r/{}/hot.json'.format(subreddit)
+    r = requests.get(url, allow_redirects=False, headers=header)
     if r.status_code != 200:
         return (print("None"))
     titles = r.json().get("data").get("children")
     for title in titles[:10]:
         print(title["data"]["title"])
     return 0
+
+
+if __name__ == '__main__':
+    import sys
+
+    if len(sys.argv) < 2:
+        print("Please pass an argument for the subreddit to search.")
+    else:
+        subreddit = sys.argv[1]
+        titles = top_ten(subreddit)
