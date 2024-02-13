@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """ A script that checks the number of subscribers of a given subreddit"""
 
-from requests import get
 import requests
 import json
 

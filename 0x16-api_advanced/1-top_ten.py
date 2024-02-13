@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """A script that prints the titles of top ten hot posts ofa given subreddit"""
 
-from requests import get
 import requests
 import json
 
