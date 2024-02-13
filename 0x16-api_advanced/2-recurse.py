@@ -6,18 +6,36 @@ import json
 
 
 def recurse(subreddit, host_list=[], after="null"):
-    """ A function that prints the titles of hot posts of a given subreddit"""
+    """ A function that prints the nuof titles of hot posts using recursion"""
 
-    headers = {'user-agent': '/u/benardkiplangat API python for ALX Learning'}
-    client = requests.session()
-    client.headers = headers
-    paramss = {"limit": "100", "after": after}
-    url =  'https://www.reddit.com/r/{}/hot.json'.format(subreddit)
-    r = client.get(url, allow_redirects=False, params=paramss)
+    header = {'user-agent': '/u/benardkiplangat API python for ALX Learning'}
+    if after is None:
+        url = f'https://www.reddit.com/r/{subreddit}/hot.json?limit=100'
+    else:
+        url = f'https://www.reddit.com/r/{subreddit}/hot.json?limit=100&after={after}'
+    r = requests.get(url, allow_redirects=False, headers=header)
     if r.status_code != 200:
         return None
-    titles = r.json().get("data").get("children")
+    posts = r.json().get("data").get("children")
+    for post in posts:
+        host_list.append(post["data"]["title"])
+
+    after = r.json().get("data").get("title")
+
     if after is not None:
-        host_list.append(titles[len(host_list)]["data"]["title"])
-        recurse(subreddit, host_list, after)
+        return recurse(subreddit, host_list, after)
     return host_list
+
+
+if __name__ == '__main__':
+    import sys
+
+    if len(sys.argv) < 2:
+        print("Please pass an argument for the subreddit to search.")
+    else:
+        subreddit = sys.argv[1]
+        result = recurse(subreddit)
+        if result is not None:
+            print(len(result))
+        else:
+            print("None")
