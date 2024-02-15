@@ -2,7 +2,6 @@
 """A script that prints the titles of hot posts ofa given subreddit"""
 
 import requests
-import json
 
 
 def recurse(subreddit, host_list=[], after="null"):
@@ -25,17 +24,3 @@ def recurse(subreddit, host_list=[], after="null"):
     if after is not None:
         return recurse(subreddit, host_list, after)
     return host_list
-
-
-if __name__ == '__main__':
-    import sys
-
-    if len(sys.argv) < 2:
-        print("Please pass an argument for the subreddit to search.")
-    else:
-        subreddit = sys.argv[1]
-        result = recurse(subreddit)
-        if result is not None:
-            print(len(result))
-        else:
-            print("None")
