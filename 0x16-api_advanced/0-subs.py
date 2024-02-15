@@ -11,18 +11,7 @@ def number_of_subscribers(subreddit):
     header = {'user-agent': '/u/benardkiplangat API python for ALX Learning'}
     url = 'https://www.reddit.com/r/{}/about.json'.format(subreddit)
     r = requests.get(url, allow_redirects=False, headers=header)
-    if r.status_code != 200:
+    if r.status_code == 404:
         return 0
     data = r.json().get("data")
-    return (data.get("subscribers"))
-
-
-if __name__ == '__main__':
-    import sys
-
-    if len(sys.argv) < 2:
-        print("Please pass an argument for the subreddit to search.")
-    else:
-        subreddit = sys.argv[1]
-        num_subscribers = number_of_subscribers(subreddit)
-        print(num_subscribers)
+    return data.get("subscribers")
