@@ -1,6 +1,6 @@
 # Postmortem
 
-![Flogging a dead horse](post-mortem-meetings.jpg)
+![car hitting an egg](incident.jpg)
 
 ## Issue Summary
 
