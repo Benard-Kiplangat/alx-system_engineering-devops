@@ -52,7 +52,7 @@ server {
 		internal;
 	}
 
- 	add_header X-Served-By 78806-web-01;
+ 	add_header X-Served-By 239348-web-01;
 	location / {
 		include proxy_params;
 		proxy_pass http://127.0.0.1:5000;
