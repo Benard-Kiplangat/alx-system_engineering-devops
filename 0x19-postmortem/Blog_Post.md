@@ -20,7 +20,7 @@ First, we cloned our site's repository from GitBug, followed the installation in
 + 12-02-2024 11:53 AM EAT - We assumed the bcrypt (one of our site's dependencies) gem being used was either at fault or used incorrectly because the error message on the site showed that the bcrypt gem was raising an error over an invalid hash.
 + 12-02-2024 12:42 PM EAT - We checked that the views might not be binding the form fields to the right model fields, which later turned out to be false.
 + 12-02-2024 13:05 PM EAT - We were misled by thinking that our controllers might be creating a different hash for a valid password of the site's admin.
-+ 05-02-2024 13:35 PM EAT - Winus thought the issue might have been that the password was not properly hashed.
++ 12-02-2024 13:35 PM EAT - Winus thought the issue might have been that the password was not properly hashed.
 + 12-02-2024 14:00 PM EAT - The incident was escalated to the backend development team.
 + 12-02-2024 14:12 PM EAT - The incident was resolved by updating the requirements (the bcrypt gem version) for the backend server.
 
