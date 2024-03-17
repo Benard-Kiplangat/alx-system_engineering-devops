@@ -18,7 +18,10 @@
 
 # Default server configuration
 #
-server {
+events {
+}
+http {
+  server {
 	listen 80 default_server;
 	listen [::]:80 default_server;
 
@@ -44,7 +47,6 @@ server {
 	index index.html index.htm index.nginx-debian.html;
 
 	server_name _;
- 	rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;
 
  	error_page 404 /custom_404.html;
 	location = /custom_404.html {
@@ -58,14 +60,14 @@ server {
 		proxy_pass http://127.0.0.1:5000;
 		# First attempt to serve request as file, then
 		# as directory, then fall back to displaying a 404.
-		#try_files $uri $uri/ =404;
+		try_files $uri $uri/ =404;
 	}
  
 	location /hbnb_static {
 		alias /data/web_static/current;
 		autoindex off;
 	}
-
+}
 	# pass PHP scripts to FastCGI server
 	#
 	#location ~ \.php$ {
