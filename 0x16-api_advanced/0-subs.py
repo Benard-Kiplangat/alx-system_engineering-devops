@@ -1,18 +1,32 @@
 #!/usr/bin/python3
-""" A script that checks the number of subscribers of a given subreddit"""
-
+'''A module containing functions for working with the Reddit API.
+'''
 import requests
 
 
-def number_of_subscribers(subreddit):
-    """ A function that checks the number of subscribers of a given subredit"""
+BASE_URL = 'https://www.reddit.com'
+'''Reddit's base API URL.
+'''
 
-    header = {
-            'user-agent': '/u/benardkiplangat API python for ALX Learning'
-            }
-    url = 'https://www.reddit.com/r/{}/about.json'.format(subreddit)
-    r = requests.get(url, headers=header, allow_redirects=False)
-    if r.status_code == 404:
-        return 0
-    data = r.json().get("data")
-    return data.get("subscribers")
+
+def number_of_subscribers(subreddit):
+    '''Retrieves the number of subscribers in a given subreddit.
+    '''
+    api_headers = {
+        'Accept': 'application/json',
+        'User-Agent': ' '.join([
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+            'AppleWebKit/537.36 (KHTML, like Gecko)',
+            'Chrome/97.0.4692.71',
+            'Safari/537.36',
+            'Edg/97.0.1072.62'
+        ])
+    }
+    res = requests.get(
+        '{}/r/{}/about/.json'.format(BASE_URL, subreddit),
+        headers=api_headers,
+        allow_redirects=False
+    )
+    if res.status_code == 200:
+        return res.json()['data']['subscribers']
+    return 0
