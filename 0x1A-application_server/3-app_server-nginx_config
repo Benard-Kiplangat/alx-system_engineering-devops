@@ -18,7 +18,10 @@
 
 # Default server configuration
 #
-server {
+events {
+}
+http {
+  server {
 	listen 80 default_server;
 	listen [::]:80 default_server;
 
@@ -44,7 +47,6 @@ server {
 	index index.html index.htm index.nginx-debian.html;
 
 	server_name _;
- 	rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;
 
  	error_page 404 /custom_404.html;
 	location = /custom_404.html {
@@ -52,29 +54,25 @@ server {
 		internal;
 	}
 
- 	add_header X-Served-By 78806-web-01;
+ 	add_header X-Served-By 239348-web-01;
+	location / {
+		include proxy_params;
+		proxy_pass http://127.0.0.1:5000;
+		# First attempt to serve request as file, then
+		# as directory, then fall back to displaying a 404.
+		#try_fiiles $uri $uri/ =404;
+	}
  
 	location /hbnb_static {
 		alias /data/web_static/current;
 		autoindex off;
 	}
 
-	location /airbnb-onepage/ {
-		include proxy_params;
-		proxy_pass http://0.0.0.0:5000/airbnb-onepage/;
-	}
-
 	location /airbnb-dynamic/number_odd_or_even/ {
 		include proxy_params;
 		proxy_pass http://0.0.0.0:5001/number_odd_or_even/;
 	}
-
-	location / {
-		# First attempt to serve request as file, then
-		# as directory, then fall back to displaying a 404.
-		try_files $uri $uri/ =404;
-	}
-
+}
 	# pass PHP scripts to FastCGI server
 	#
 	#location ~ \.php$ {
